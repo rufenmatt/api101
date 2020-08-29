@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>API101</title>
+  </head>
+  <body>
+    <h1>Fetch lions</h1>
+
+    <script>
+      console.log('about to fetch some lions');
+      const filenames = [
+        'images/lion-1.jpeg',
+        'images/lion-2.jpg',
+        'images/lion-3.jpeg',
+        'images/lion-4.jpeg'
+      ];
+
+      catchRainbows(filenames)
+        .then(response => {
+          console.log('nice');
+        })
+        .catch(error => {
+          console.log('error!');
+          console.error(error);
+        });
+
+      async function catchRainbows(filenames) {
+        for (let filename of filenames) {
+          const response = await fetch(filename);
+          const blob = await response.blob();
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(blob);
+          img.width = '300';
+          document.body.append(img);
+        }
+      }
+    </script>
+  </body>
+</html>

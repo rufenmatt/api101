@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>API101</title>
+  </head>
+  <body>
+    <h1>Fetch a painting</h1>
+    <img src="" id="painting" width="480" />
+    <script>
+      console.log('about to fetch a painting');
+
+      catchPainting()
+        .then(response => {
+          console.log('nice');
+        })
+        .catch(error => {
+          console.log('error!');
+          console.error(error);
+        });
+
+      async function catchPainting() {
+        const response = await fetch('alex-grey.jpg');
+        const blob = await response.blob();
+        document.getElementById('painting').src = URL.createObjectURL(blob);
+      }
+    </script>
+  </body>
+</html>
